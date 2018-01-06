@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bertha's Deluxe Chocolates</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://jadran.sdsu.edu/bootstrap/css/bootstrap.min.css">
+    <script src="http://jadran.sdsu.edu/jquery/jquery.js" type="text/javascript"></script>
+    <script type="text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="http://jadran.sdsu.edu/bootstrap/js/bootstrap.min.js" ></script>
+
+    <!-- Developer Scripts-->
+    <!-- Java Script-->
+    <!--<script type="text/javascript" src="js/main.js"></script>-->
+    <script type="text/javascript" src="js/products.js"></script>
+    <script type="text/javascript" src="js/shopping_cart.js"></script>
+    <script type="text/javascript" src="js/checkoutForm.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+</head>
+<!--
+    Sunku Ravindranath, Raghav Kishan
+    Project #4
+    Fall 2017
+    820174908
+    jadrn063
+-->
+<body>
+
+    <!-- Navigation Bar-->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">Bertha's Deluxe Chocolates</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html" id="home">Home<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="products">Products<span class="sr-only caret">(current)</span></a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" id="milk_chocolates" href="#">Milk chocolate</a>
+                        <a class="dropdown-item" id="dark_chocolates" href="#">Dark chocolate</a>
+                        <a class="dropdown-item" id="nuts_chews" href="#">Nuts and chews</a>
+                        <a class="dropdown-item" id="brittles_toffies" href="#">Brittles and toffies</a>
+                        <a class="dropdown-item" id="truffles" href="#">Truffles</a>
+                        <a class="dropdown-item" id="gifts" href="#">Gifts</a>
+                        <a class="dropdown-item" id="holiday_assortment" href="#">Holiday assortments</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="about_us" >About Us<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="contact_us">Contact<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link buy" href="#dialog-modal" id="buy" data-toggle="modal">Cart  <span class="badge badge-light" id = "cart_quantity"></span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Content Products being displayes-->
+    <div class = "container" id="content_main">
+        <div class="card bg-dark text-white">
+            <img class="card-img" src="chocolates-slider.jpg" alt="Card image">
+            <div class="card-img-overlay">
+                <h2 class="card-title">Welcome to the World of Chocolates !!!</h2>
+                <p class="card-text">Experience Unusual and exiting flavours.</p>
+                <p class="card-text">Find a gift for everyone...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" id="dialog-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cart_label">Your Shopping Cart</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="customer_products_list">
+                        <div class="list-group" id="customer_products_list_group">
+
+                        </div>
+                    </div>
+                    <div id = "customer_info_order_form">
+                        <form method="post" action="/perl/jadrn063/read_cookie.cgi">
+
+                            <!--<div class="alert alert-danger my-2" role="alert">-->
+                                <!--<h6 class = "messageLine">&nbsp;</h6>-->
+                            <!--</div>-->
+
+                            <div class="row">
+                                <h5 class="text-primary mx-3 mt-4 font-weight-bold">Checkout</h5>
+                            </div>
+
+                            <div class = "row">
+                                <div class = "form-group col-sm-4 my-sm-3">
+                                    <label for = "firstNameInput">First Name</label>
+                                    <input type="text" class = "form-control form-control-sm" id = "firstNameInput"  placeholder = "First Name" name="FirstName" required>
+                                    <div class="invalid-feedback nameMessageLine">
+                                        Please enter your First name
+                                    </div>
+                                </div>
+
+                                <div class = "form-group col-sm-4 my-sm-3">
+                                    <label for = "lastNameInput">Last Name</label>
+                                    <input type="text" class = "form-control form-control-sm" id = "lastNameInput"  placeholder = "Last Name" name="LastName" required>
+                                    <div class="invalid-feedback lastNameMessageLine">
+                                        Please enter your Last name
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <h6 class="text-primary mx-3 font-weight-bold">Shipping Address</h6>
+                            </div>
+
+                            <div class = "form-group">
+                                <label for = "addressLine1">Address Line 1</label>
+                                <input type="text" class = "form-control form-control-sm" id = "addressLine1"  placeholder = "Address Line 1" name="AddressLine1" aria-describedby="addressLine1Desc" required>
+                                <small id = "addressLine1Desc"  class="form-text text-muted">Street Address, P.O. box, Compnay Name, c/o</small>
+                                <div class="invalid-feedback addressOneMessageLine">
+                                    Please enter your Address
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class = "form-group col-sm-5">
+                                    <label for = "addressLine2">Address Line 2</label>
+                                    <input type="text" class = "form-control form-control-sm" id = "addressLine2"  placeholder = "Address Line 2" name="AddressLine2" aria-describedby = "addressLine2Desc">
+                                    <small id = "addressLine2Desc"  class="form-text text-muted">Apartment number, Unit, floor, etc </small>
+                                </div>
+
+                                <div class = "form-group col-sm-4">
+                                    <label for = "cityTown">City / Town</label>
+                                    <input type="text" class = "form-control form-control-sm" id = "cityTown" name="CityTown" placeholder="City / Town" required>
+                                    <div class="invalid-feedback cityTownMessageLine">
+                                        Please enter your City/Town
+                                    </div>
+                                </div>
+
+                                <div class = "form-group col-sm-3">
+                                    <label for = "state">State</label>
+                                    <input type="text" class = "form-control form-control-sm" id = "state" name="State" placeholder="State" aria-describedby="StateDesc" maxlength="2" required>
+                                    <small id = "StateDesc"  class="form-text text-muted">Two Letters Only</small>
+                                    <div class="invalid-feedback stateMessageLineOne">
+                                        Please enter your State
+                                    </div>
+                                    <div class="invalid-feedback stateMessageLineTwo">
+                                        The state appears to be invalid, please use the two letter state abbreviation
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class = "row">
+
+                                <div class = "form-group col-sm-4">
+                                    <label for = "zipCode">Zip Code</label>
+                                    <input type="text" class = "form-control form-control-sm" id = "zipCode" name="ZipCode" placeholder="Zip Code" maxlength="5" aria-describedby="zipCodeDesc"required>
+                                    <small id = "zipCodeDesc"  class="form-text text-muted">Zip Code Max 5 digits</small>
+                                    <div class="invalid-feedback zipCodeMessageLineOne">
+                                        Please enter your Zip Code
+                                    </div>
+                                    <div class="invalid-feedback zipCodeMessageLineTwo">
+                                        The Zip Code appears to be invalid, numbers only please
+                                    </div>
+                                </div>
+
+                                <div class = "form-group col-sm-2 my-sm-4" >
+                                    <label>Phone Number</label>
+                                </div>
+                                <div class = "form-group col-xs-3 my-sm-4">
+                                    <input type="tel" name="PhoneAreaCode" class="form-control form-control-sm" placeholder = "ddd" size="3" maxlength="3">
+                                    <div class="invalid-feedback areaCodeMessageLineOne">
+                                        Please enter your Phone Area Code
+                                    </div>
+                                    <div class="invalid-feedback areaCodeMessageLineTwo">
+                                        The area code must contain numbers only
+                                    </div>
+                                </div>
+                                <div class = "form-group col-xs-3 my-sm-4">
+                                    <input type="tel" name="PhonePrefixNumber" class="form-control form-control-sm phone-number" placeholder = "ddd" size="3" maxlength="3" >
+                                    <div class="invalid-feedback phonePrefixMessageLineOne">
+                                        Please enter your Phone Prefix number
+                                    </div>
+                                    <div class="invalid-feedback phonePrefixMessageLineTwo">
+                                        The phone prefix number must have numbers only
+                                    </div>
+                                </div>
+                                <div class = "form-group col-xs-3 my-sm-4">
+                                    <input type="tel" name="PhoneNumber" class="form-control form-control-sm phone-number" placeholder = "dddd" size="4" maxlength="4">
+                                    <div class="invalid-feedback phoneMessageLineOne">
+                                        Please enter your Phone number
+                                    </div>
+                                    <div class="invalid-feedback phoneMessageLineTwo">
+                                        The Phone Number must have numbers only
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--<div class="row ">-->
+                                <!--<div class="form-group col-sm-7">-->
+                                    <!--<label for="emailAddress">Email address</label>-->
+                                    <!--<input type="email" class="form-control form-control-sm" id="emailAddress" aria-describedby="emailHelp" placeholder="Enter email" name="EmailAddress" required>-->
+                                    <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+                            <div class="panel-group" id="accordion">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h6 class="panel-title text-primary">
+                                            <div class="checkbox">
+                                                <label data-toggle="collapse" data-target="#collapseOne">
+                                                    <input type="checkbox" id="differentFromBillingAddress"/> Billing Address different from Shipping address
+                                                </label>
+                                            </div>
+                                        </h6>
+
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+
+                                            <div class = "row">
+                                                <div class = "form-group col-sm-4 my-sm-3">
+                                                    <label for = "firstNameInputBilling">First Name</label>
+                                                    <input type="text" class = "form-control form-control-sm" id = "firstNameInputBilling"  placeholder = "First Name" name="FirstNameBilling">
+                                                    <div class="invalid-feedback billingNameMessageLine">
+                                                        Please enter your First name
+                                                    </div>
+                                                </div>
+
+                                                <div class = "form-group col-sm-4 my-sm-3">
+                                                    <label for = "lastNameInputBiling">Last Name</label>
+                                                    <input type="text" class = "form-control form-control-sm" id = "lastNameInputBiling"  placeholder = "Last Name" name="LastNameBilling">
+                                                    <div class="invalid-feedback billingLastNameMessageLine">
+                                                        Please enter your Last name
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class = "form-group">
+                                                <label for = "addressLine1Billing">Address Line 1</label>
+                                                <input type="text" class = "form-control form-control-sm" id = "addressLine1Billing"  placeholder = "Address Line 1" name="AddressLine1Billing" aria-describedby="addressLine1DescBilling">
+                                                <small id = "addressLine1DescBilling"  class="form-text text-muted">Street Address, P.O. box, Compnay Name, c/o</small>
+                                                <div class="invalid-feedback billingAddressOneMessageLine">
+                                                    Please enter your Address
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+
+                                                <div class = "form-group col-sm-5">
+                                                    <label for = "addressLine2Billing">Address Line 2</label>
+                                                    <input type="text" class = "form-control form-control-sm" id = "addressLine2Billing"  placeholder = "Address Line 2" name="AddressLine2Billing" aria-describedby = "addressLine2DescBilling">
+                                                    <small id = "addressLine2DescBilling"  class="form-text text-muted">Apartment number, Unit, floor, etc </small>
+                                                </div>
+
+                                                <div class = "form-group col-sm-4">
+                                                    <label for = "cityTownBilling">City / Town</label>
+                                                    <input type="text" class = "form-control form-control-sm" id = "cityTownBilling" name="CityTownBilling" placeholder="City / Town">
+                                                    <div class="invalid-feedback billingCityTownMessageLine">
+                                                        Please enter your City/Town
+                                                    </div>
+                                                </div>
+
+                                                <div class = "form-group col-sm-3">
+                                                    <label for = "stateBilling">State</label>
+                                                    <input type="text" class = "form-control form-control-sm" id = "stateBilling" name="StateBilling" placeholder="State" aria-describedby="StateDescBilling" maxlength="2">
+                                                    <small id = "StateDescBilling"  class="form-text text-muted">Two Letters Only</small>
+                                                    <div class="invalid-feedback billingStateMessageLineOne">
+                                                        Please enter your State
+                                                    </div>
+                                                    <div class="invalid-feedback billingStateMessageLineTwo">
+                                                        The state appears to be invalid, please use the two letter state abbreviation
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class = "row">
+
+                                                <div class = "form-group col-sm-4">
+                                                    <label for = "zipCodeBilling">Zip Code</label>
+                                                    <input type="text" class = "form-control form-control-sm" id = "zipCodeBilling" name="ZipCodeBilling" placeholder="Zip Code" maxlength="5" aria-describedby="zipCodeDescBilling">
+                                                    <small id = "zipCodeDescBilling"  class="form-text text-muted">Zip Code Max 5 digits</small>
+                                                    <div class="invalid-feedback billingZipCodeMessageLineOne">
+                                                        Please enter your Zip Code
+                                                    </div>
+                                                    <div class="invalid-feedback billingZipCodeMessageLineTwo">
+                                                        The Zip Code appears to be invalid, numbers only please
+                                                    </div>
+                                                </div>
+
+                                                <div class = "form-group col-sm-2 my-sm-4" >
+                                                    <label>Phone Number</label>
+                                                </div>
+                                                <div class = "form-group col-xs-3 my-sm-4">
+                                                    <input type="tel" name="PhoneAreaCodeBilling" class="form-control form-control-sm" placeholder = "ddd" size="3" maxlength="3">
+                                                    <div class="invalid-feedback billingAreaCodeMessageLineOne">
+                                                        Please enter your Phone Area Code
+                                                    </div>
+                                                    <div class="invalid-feedback billingAreaCodeMessageLineTwo">
+                                                        The area code must contain numbers only
+                                                    </div>
+                                                </div>
+                                                <div class = "form-group col-xs-3 my-sm-4">
+                                                    <input type="tel" name="PhonePrefixNumberBilling" class="form-control form-control-sm phone-number" placeholder = "ddd" size="3" maxlength="3" >
+                                                    <div class="invalid-feedback billingPhonePrefixMessageLineOne">
+                                                        Please enter your Phone Prefix number
+                                                    </div>
+                                                    <div class="invalid-feedback billingPhonePrefixMessageLineTwo">
+                                                        The phone prefix number must have numbers only
+                                                    </div>
+                                                </div>
+                                                <div class = "form-group col-xs-3 my-sm-4">
+                                                    <input type="tel" name="PhoneNumberBilling" class="form-control form-control-sm phone-number" placeholder = "dddd" size="4" maxlength="4">
+                                                    <div class="invalid-feedback billingPhoneMessageLineOne">
+                                                        Please enter your Phone number
+                                                    </div>
+                                                    <div class="invalid-feedback billingPhoneMessageLineTwo">
+                                                        The Phone Number must have numbers only
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id = "sendInfo">
+                                <input type="hidden" name="">
+
+                            </div>
+
+
+                            <div>
+
+                                <div>
+                                    <h6 class="panel-title text-primary font-weight-bold">Payment Information</h6>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-sm-7">
+                                        <label>Payment Gateway</label>
+                                        <div class="btn-group sm-3" data-toggle = "buttons">
+                                            <label class="btn btn-outline-primary btn-sm">
+                                                <input type="radio" name="PaymentGateway" autocomplete="off" value="Visa" required>Visa
+                                            </label>
+                                            <label class="btn btn-outline-primary btn-sm">
+                                                <input type="radio" name="PaymentGateway" autocomplete="off" value="MasterCard" required>Master Card
+                                            </label>
+                                            <label class="btn btn-outline-primary btn-sm">
+                                                <input type="radio" name="PaymentGateway" autocomplete="off" value="Discover" required>Discover
+                                            </label>
+                                            <label class="btn btn-outline-primary btn-sm">
+                                                <input type="radio" name="PaymentGateway" autocomplete="off" value="Amex" required>American Express
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class = "row">
+                                    <div class = "form-group col-sm-4 my-sm-3">
+                                        <label for = "nameOnCard">Name on Card</label>
+                                        <input type="text" class = "form-control form-control-sm" id = "nameOnCard"  placeholder = "Name on Card" name="NameOnCard" required>
+                                        <div class="invalid-feedback nameCardMessageLine">
+                                            Please enter the name on your card
+                                        </div>
+                                    </div>
+
+                                    <div class = "form-group col-sm-4 my-sm-3">
+                                        <label for = "cardNumber">Card Number</label>
+                                        <input type="text" class = "form-control form-control-sm" id = "cardNumber"  placeholder = "XXXXXXXXXXXXXXXX" name="CardNumber" required>
+                                        <div class="invalid-feedback cardNumberMessageLineOne">
+                                            Please enter your card number
+                                        </div>
+                                        <div class="invalid-feedback cardNumberMessageLineTwo">
+                                            The card number must consist numbers only
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class = "row">
+
+                                    <div class = "form-group my-sm-3 ml-sm-3 mr-sm-1">
+                                        <label>Valid Through:</label>
+                                        <input type="text" class = "form-control form-control-sm" id = "cardMonth"  placeholder = "MM" name="ValidMonth" size="2" maxlength="2" required>
+                                        <div class="invalid-feedback cardMonthMessageLineOne">
+                                            Please enter the month until card is valid
+                                        </div>
+                                        <div class="invalid-feedback cardMonthMessageLineTwo">
+                                            The month must have numbers only
+                                        </div>
+                                        <div class="invalid-feedback cardMonthMessageLineThree">
+                                            Not a valid month. Please enter the correct month
+                                        </div>
+                                    </div>
+
+                                    <div class = "form-group my-sm-4 mr-sm-5">
+                                        <label></label>
+                                        <input type="text" class = "form-control form-control-sm" id = "cardYear"  placeholder = "YYYY" name="ValidYear" size="4" maxlength="4" required>
+                                        <div class="invalid-feedback cardYearMessageLineOne">
+                                            Please enter the year until card is valid
+                                        </div>
+                                        <div class="invalid-feedback cardYearMessageLineTwo">
+                                            The year must have numbers only
+                                        </div>
+                                        <div class="invalid-feedback cardYearMessageLineThree">
+                                            Not a valid year. Please enter the correct year
+                                        </div>
+                                    </div>
+
+                                    <div class = "form-group my-sm-3 mx-sm-5">
+                                        <label>CVV:</label>
+                                        <input type="text" class = "form-control form-control-sm" id = "cardCVV"  placeholder = "XXX" name="CardCVV" size="4" maxlength="4" minlength="3" required>
+                                        <div class="invalid-feedback cardCVVMessageLineOne">
+                                            Please enter the CVV/Security code of the card
+                                        </div>
+                                        <div class="invalid-feedback cardCVVMessageLineTwo">
+                                            The CVV/Security code must have numbers only
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!--<div class="alert alert-danger my-2" role="alert">-->
+                                <!--<h6 class = "messageLine">&nbsp;</h6>-->
+                            <!--</div>-->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-outline-primary">Place Order</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
